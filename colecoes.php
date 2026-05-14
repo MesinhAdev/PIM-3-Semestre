@@ -27,18 +27,18 @@
     <h2>NOSSAS COLEÇÕES</h2>
     <div class="product-grid">
         <div class="product-card">
-            <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=1200" alt="Cyberpunk">
+            <img src="IMG/tenis1.jpeg" alt="Cyberpunk">
             <div class="product-info">
-                <h3>Coleção Cyberpunk</h3>
-                <p>Estilo do Futuro</p>
+                <h3>Peças personalizadas!</h3>
+                <p>Tênis e bonés</p>
                 <a href="index.php"><button>VER PRODUTOS</button></a>
             </div>
         </div>
 
         <div class="product-card">
-            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1200" alt="Gothic">
+            <img src="IMG/saia1.jpeg" alt="Gothic">
             <div class="product-info">
-                <h3>Coleção Gothic Noir</h3>
+                <h3>Coleção Pirigótica</h3>
                 <p>A essência das trevas</p>
                 <a href="index.php"><button>VER PRODUTOS</button></a>
             </div>

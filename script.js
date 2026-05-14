@@ -127,3 +127,33 @@ function checkout() {
 }
 
 updateCart();
+
+function changePayment(){
+
+    const method = document.getElementById("payment-method").value;
+
+    const pixBox = document.getElementById("pix-box");
+
+    const cardBox = document.getElementById("card-box");
+
+    const boletoBox = document.getElementById("boleto-box");
+
+    pixBox.style.display = "none";
+    cardBox.style.display = "none";
+    boletoBox.style.display = "none";
+
+    if(method === "PIX"){
+
+        pixBox.style.display = "block";
+    }
+
+    if(method === "Cartao"){
+
+        cardBox.style.display = "block";
+    }
+
+    if(method === "Boleto"){
+
+        boletoBox.style.display = "block";
+    }
+}

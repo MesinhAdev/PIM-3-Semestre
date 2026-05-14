@@ -95,6 +95,117 @@ foreach ($_SESSION['cart'] as $item) {
 
                 <textarea name="endereco" placeholder="Endereço completo" required></textarea>
 
+               
+                <label>Forma de Pagamento</label>
+
+<select
+    name="tipo_pagamento" 
+    id="payment-method" 
+    onchange="changePayment()" 
+    required
+>
+
+    <option value="">Selecione</option>
+
+    <option value="PIX">PIX</option>
+
+    <option value="Cartao">
+        Cartão
+    </option>
+
+    <option value="Boleto">
+        Boleto
+    </option>
+
+</select>
+
+<!-- PIX -->
+
+<div class="payment-box" id="pix-box">
+
+    <h3>
+        Pagamento via PIX
+    </h3>
+
+    <p>
+        Escaneie o QR Code abaixo:
+    </p>
+
+    <img 
+        src="pix-qrcode.png" 
+        alt="QR Code PIX"
+    >
+
+    <input 
+        type="text" 
+        value="pix@lordedascamisetas.com" 
+        readonly
+    >
+
+</div>
+
+<!-- CARTÃO -->
+
+<div class="payment-box" id="card-box">
+
+    <h3>
+        Pagamento com Cartão
+    </h3>
+
+    <input 
+        type="text" 
+        name="numero_cartao"
+        placeholder="Número do Cartão"
+    >
+
+    <input 
+        type="text" 
+        name="nome_cartao"
+        placeholder="Nome no Cartão"
+    >
+
+    <div class="card-row">
+
+        <input 
+            type="text" 
+            name="validade_cartao"
+            placeholder="Validade"
+        >
+
+        <input 
+            type="text" 
+            name="cvv_cartao"
+            placeholder="CVV"
+        >
+
+    </div>
+
+</div>
+
+<!-- BOLETO -->
+
+<div class="payment-box" id="boleto-box">
+
+    <h3>
+        Pagamento via Boleto
+    </h3>
+
+    <p>
+        O boleto será gerado após finalizar a compra.
+    </p>
+
+    <button type="button">
+
+        Gerar Boleto
+
+    </button>
+
+</div>
+
+</select>
+
+
+
                 <button type="submit">
                     FINALIZAR PEDIDO
                 </button>

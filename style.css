@@ -1,3 +1,4 @@
+
 * {
     margin: 0;
     padding: 0;
@@ -64,8 +65,15 @@ nav a:hover {
     transition: 0.3s;
 }
 
+.header-actions button:hover,
+.product-info button:hover,
+.checkout:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+}
+
 .hero {
-    height: 100vh;
+    height: 150vh;
     background: url('banner.png') center/cover;
     position: relative;
     display: flex;
@@ -112,7 +120,16 @@ nav a:hover {
     font-weight: 700;
     border-radius: 14px;
     cursor: pointer;
+    transition: 0.3s;
 }
+
+.hero button:hover {
+    transform: scale(1.05);
+}
+
+/* ========================= */
+/* PRODUTOS */
+/* ========================= */
 
 .products {
     padding: 100px 8%;
@@ -125,57 +142,61 @@ nav a:hover {
 
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-    align-items: stretch; /* Faz todos os cards da mesma linha terem a mesma altura */
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
 }
 
 .product-card {
     background: #111;
-    border-radius: 20px;
+    border-radius: 22px;
     overflow: hidden;
-    transition: 0.3s;
+    transition: 0.35s ease;
+    position: relative;
     display: flex;
-    flex-direction: column; /* Organiza conteúdo em coluna */
-    height: 100%;
+    flex-direction: column;
 }
 
 .product-card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(255, 49, 49, 0.18);
 }
 
-/* Correção para ajustar a imagem ao tamanho do card */
 .product-card img {
     width: 100%;
-    height: 100%; /* Agora ocupa toda a altura */
-    object-fit: cover; /* Mantém a proporção e se encaixa */
-    background: transparent; /* Removemos o fundo preto para uma visualização limpa */
-    padding: 30px; /* Aumentamos o padding para a imagem respirar */
+    aspect-ratio: 1 / 1.2;
+    object-fit: cover;
+    display: block;
 }
 
 .product-info {
-    padding: 20px;
+    padding: 18px;
     display: flex;
     flex-direction: column;
-    flex-grow: 1; /* Faz a info ocupar o resto do card */
-    justify-content: space-between; /* Empurra o botão para baixo */
-    text-align: center;
+    gap: 12px;
+    background: #111;
+    flex: 1;
 }
 
 .product-info h3 {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.4;
 }
 
 .product-info p {
     color: #ff3131;
-    font-weight: 700;
-    margin: 10px 0;
     font-size: 1.3rem;
+    font-weight: 700;
 }
 
 .product-info button {
     width: 100%;
+    margin-top: auto;
 }
+
+/* ========================= */
+/* CARRINHO */
+/* ========================= */
 
 .cart {
     position: fixed;
@@ -208,18 +229,23 @@ nav a:hover {
     margin-bottom: 20px;
     padding-bottom: 10px;
     border-bottom: 1px solid #222;
+    gap: 10px;
+}
+
+.cart-item img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 10px;
 }
 
 .cart-footer {
     margin-top: auto;
 }
 
-@media(max-width:900px){
-    nav { display: none; }
-    .hero h1 { font-size: 3rem; }
-    .cart { width: 100%; }
-    .logo img { width: 100px; }
-}
+/* ========================= */
+/* CHECKOUT */
+/* ========================= */
 
 .checkout-container{
     max-width:1200px;
@@ -297,6 +323,10 @@ nav a:hover {
     color:white;
     gap:20px;
 }
+
+/* ========================= */
+/* SOBRE */
+/* ========================= */
 
 .about-hero{
     position:relative;
@@ -439,7 +469,27 @@ nav a:hover {
     opacity:0.8;
 }
 
+/* ========================= */
+/* RESPONSIVIDADE */
+/* ========================= */
+
 @media(max-width:900px){
+
+    nav {
+        display: none;
+    }
+
+    .hero h1 {
+        font-size: 3rem;
+    }
+
+    .cart {
+        width: 100%;
+    }
+
+    .logo img {
+        width: 100px;
+    }
 
     .about-container{
         grid-template-columns:1fr;
@@ -452,4 +502,141 @@ nav a:hover {
     .about-content h1{
         font-size:2.5rem;
     }
+}
+
+@media(max-width:700px){
+
+    .product-grid{
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .product-card img{
+        aspect-ratio: 1 / 1.25;
+    }
+
+    .product-info{
+        padding: 14px;
+    }
+
+    .product-info h3{
+        font-size: 0.95rem;
+    }
+
+    .product-info p{
+        font-size: 1.1rem;
+    }
+}
+
+@media(max-width:500px){
+
+    .product-grid{
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        height: 100vh;
+    }
+
+    .hero h1 {
+        font-size: 2.3rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+}
+
+
+select{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:10px;
+    background:#222;
+    color:white;
+}
+
+.payment-box{
+
+    display:none;
+
+    margin-top:20px;
+
+    background:#1a1a1a;
+
+    padding:25px;
+
+    border-radius:20px;
+}
+
+.payment-box h3{
+
+    margin-bottom:15px;
+
+    color:#ff3131;
+}
+
+.payment-box p{
+
+    margin-bottom:15px;
+
+    color:#ccc;
+}
+
+.payment-box img{
+
+    width:220px;
+
+    border-radius:15px;
+
+    margin-bottom:20px;
+}
+
+.payment-box input{
+
+    width:100%;
+
+    padding:15px;
+
+    margin-bottom:15px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#222;
+
+    color:white;
+}
+
+.card-row{
+
+    display:flex;
+
+    gap:15px;
+}
+
+.card-row input{
+
+    flex:1;
+}
+
+.payment-box button{
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#ff3131;
+
+    color:white;
+
+    font-weight:bold;
+
+    cursor:pointer;
 }
