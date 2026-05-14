@@ -1,159 +1,129 @@
-const cart = [];
+let cart = [];
 
-function toggleCart(){
+function toggleCart() {
 
-document
-.getElementById("cart")
-.classList
-.toggle("active");
+    const cartElement = document.getElementById("cart");
 
+    cartElement.classList.toggle("active");
 }
 
-function addToCart(name,price){
+async function addToCart(produtoId) {
 
-cart.push({
-name,
-price
-});
+    const response = await fetch("backend/adicionar_carrinho.php", {
+
+        method: "POST",
+
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+            produto_id: produtoId
+        })
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+
+        updateCart();
+
+        alert("Produto adicionado ao carrinho!");
+    }
+}
+
+async function removeItem(index) {
+
+    await fetch("backend/remover_carrinho.php", {
+
+        method: "POST",
+
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+            index: index
+        })
+    });
+
+    updateCart();
+}
+
+async function updateCart() {
+
+    const response = await fetch("backend/buscar_carrinho.php");
+
+    cart = await response.json();
+
+    const cartItems = document.getElementById("cart-items");
+
+    const cartCount = document.getElementById("cart-count");
+
+    const cartTotal = document.getElementById("cart-total");
+
+    cartItems.innerHTML = "";
+
+    let total = 0;
+
+    cart.forEach((item, index) => {
+
+        total += item.preco * item.quantidade;
+
+        cartItems.innerHTML += `
+
+        <div class="cart-item">
+
+            <img src="${item.imagem}" width="60">
+
+            <div>
+
+                <h4>${item.nome}</h4>
+
+                <p>
+                    Quantidade: ${item.quantidade}
+                </p>
+
+                <p>
+                    R$ ${parseFloat(item.preco).toFixed(2)}
+                </p>
+
+            </div>
+
+            <button onclick="removeItem(${index})">
+                ❌
+            </button>
+
+        </div>
+        `;
+    });
+
+    if (cart.length === 0) {
+
+        cartItems.innerHTML = `
+        <p class="empty">
+            Seu carrinho está vazio.
+        </p>
+        `;
+    }
+
+    cartCount.innerText = cart.length;
+
+    cartTotal.innerText = `
+        R$ ${total.toFixed(2)}
+    `;
+}
+
+function checkout() {
+
+    if (cart.length === 0) {
+
+        alert("Seu carrinho está vazio!");
+
+        return;
+    }
+
+    window.location.href = "checkout.php";
+}
 
 updateCart();
-
-}
-
-function updateCart(){
-
-const cartItems =
-document.getElementById("cart-items");
-
-const cartCount =
-document.getElementById("cart-count");
-
-const cartTotal =
-document.getElementById("cart-total");
-
-cartItems.innerHTML = "";
-
-let total = 0;
-
-cart.forEach((item,index)=>{
-
-total += item.price;
-
-cartItems.innerHTML += `
-
-<div class="cart-item">
-
-<div>
-
-<h4>${item.name}</h4>
-
-<p>
-R$ ${item.price.toFixed(2)}
-</p>
-
-</div>
-
-<button onclick="removeItem(${index})">
-
-❌
-
-</button>
-
-</div>
-
-`;
-
-});
-
-if(cart.length === 0){
-
-cartItems.innerHTML = `
-
-<p class="empty">
-Seu carrinho está vazio.
-</p>
-
-`;
-
-}
-
-cartCount.innerText =
-cart.length;
-
-cartTotal.innerText =
-`R$ ${total.toFixed(2)}`;
-
-}
-
-function removeItem(index){
-
-cart.splice(index,1);
-
-updateCart();
-
-}
-
-/* TEMA */
-
-const themeButton =
-document.getElementById("theme-toggle");
-
-themeButton.addEventListener("click",()=>{
-
-document.body
-.classList
-.toggle("dark-mode");
-
-if(
-document.body.classList
-.contains("dark-mode")
-){
-
-themeButton.innerText = "☀️";
-
-}else{
-
-themeButton.innerText = "🌙";
-
-}
-
-});
-
-/* ANIMAÇÃO */
-
-const cards =
-document.querySelectorAll(
-".product-card"
-);
-
-window.addEventListener("scroll",()=>{
-
-cards.forEach(card=>{
-
-const top =
-card.getBoundingClientRect().top;
-
-if(top < window.innerHeight - 50){
-
-card.style.opacity = "1";
-
-card.style.transform =
-"translateY(0px)";
-
-}
-
-});
-
-});
-
-cards.forEach(card=>{
-
-card.style.opacity = "0";
-
-card.style.transform =
-"translateY(40px)";
-
-card.style.transition =
-"0.6s";
-
-});
